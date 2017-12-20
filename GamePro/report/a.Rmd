@@ -1,0 +1,13 @@
+---
+title: "Untitled"
+author: "ahle"
+date: "December 6, 2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r cars}
+summary(cars)
+```
+

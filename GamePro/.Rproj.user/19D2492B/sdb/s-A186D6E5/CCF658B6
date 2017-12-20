@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"data.table\")\n\n# ==== functions =====\nHNMining.setnames<-function(df){\n  setnames(df, \"Seniorid\",\"Userid\")\n  setnames(df, \"Jour_PR\",\"Date\")\n}\n\nHNMining.reduce<- function(df){\n  data3 = data.frame(df$Userid, df$Gameid, df$Date, df$Programid)\n  colnames(data3) <- c(\"Userid\",\"Gameid\",\"Date\",\"Programid\")\n  data3 = data3[complete.cases(data3), ]\n  return(data3)\n}\nHNMining.clean<-function(df){\n  HNMining.setnames(df)\n  dataStat = HNMining.reduce(df)\n  return(dataStat)\n}\n# ==== end functions ====\n\nHNMining.main<-function(){\n  setwd(\"D:/projects/Data Mining\")\n  \n  dataAll <- readRDS(\"data/GamePro.rds\")\n  \n  dataStat = HNMining.clean(dataAll)\n  \n  saveRDS(dataStat,\"data/dataStat.rds\")\n}",
+    "created" : 1513603667133.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "959834382",
+    "id" : "CCF658B6",
+    "lastKnownWriteTime" : 1513605648,
+    "last_content_update" : 1513605648803,
+    "path" : "D:/projects/Data Mining/GamePro/R/CleanData.R",
+    "project_path" : "R/CleanData.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

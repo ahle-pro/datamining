@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "install.packages(\"Rcmdr\")\n",
+    "created" : 1513594645574.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1929736255",
+    "id" : "D90A2B19",
+    "lastKnownWriteTime" : 1513594652,
+    "last_content_update" : 1513594652586,
+    "path" : "D:/projects/Data Mining/GameGP/R/packages.R",
+    "project_path" : "R/packages.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

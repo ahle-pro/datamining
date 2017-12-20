@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"data.table\")\n\nsetwd(\"D:/projects/Data Mining\")\n\n# collecting data\n# read the data form csv\ndata <- read_csv(\"data/gp/rawdata.csv\", col_types = cols(Jour_PR = col_datetime(format = \"%Y-%m-%d %H:%M:%S\")))\nsaveRDS(data, \"data/gp/GameGP.rds\")\n\ndataSrc <- readRDS(\"data/GamePro.rds\")\n\n\ndataAll <- readRDS(\"data/GamePro.rds\")\n\nHNMining.setnames<-function(df){\n  setnames(df, \"Seniorid\",\"Userid\")\n  setnames(df, \"Jour_PR\",\"Date\")\n}\n\nHNMining.reduce<- function(df){\n  data3 = data.frame(df$Userid, df$Gameid, df$Date, df$Programid)\n  colnames(data3) <- c(\"Userid\",\"Gameid\",\"Date\",\"Programid\")\n  data3 = data3[complete.cases(data3), ]\n  return(data3)\n}\n\nHNMining.clean<-function(df){\n  HNMining.setnames(df)\n  dataStat = HNMining.reduce(df)\n  \n  # save the work\n  saveRDS(dataStat,\"data/dataStat.rds\")\n}",
+    "created" : 1513167823062.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4010308488",
+    "id" : "E9EF35CC",
+    "lastKnownWriteTime" : 1513171314,
+    "last_content_update" : 1513171314279,
+    "path" : "D:/projects/Data Mining/GameGP/R/CleanData.R",
+    "project_path" : "R/CleanData.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

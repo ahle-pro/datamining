@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\n\n# Define UI for miles per gallon app ----\nui <- pageWithSidebar(\n  \n  # App title ----\n  headerPanel(\"Data mining\"),\n  \n  # Sidebar panel for inputs ----\n  sidebarPanel(\n    \n    # Input: Selector for variable to plot against mpg ----\n    selectInput(\"variable\", \"Program:\", \n                c(\"All\" = \"cyl\",\n                  \"PRESCO\" = \"4\",\n                  \"Brain Injury\" = \"13\")),\n    \n    # Input: Checkbox for whether outliers should be included ----\n    checkboxInput(\"outliers\", \"Show outliers\", TRUE)\n    \n  ),\n  \n  # Main panel for displaying outputs ----\n  mainPanel(\n    \n    # Output: Formatted text for caption ----\n    h3(textOutput(\"caption\")),\n    \n    # Output: Plot of the requested variable against mpg ----\n    plotOutput(\"mpgPlot\")\n    \n  )\n)\n\nmpgData <- mtcars\nmpgData$am <- factor(mpgData$am, labels = c(\"Automatic\", \"Manual\"))\n\n# Define server logic to plot various variables against mpg ----\nserver <- function(input, output) {\n  # Compute the formula text ----\n  # This is in a reactive expression since it is shared by the\n  # output$caption and output$mpgPlot functions\n  formulaText <- reactive({\n    paste(\"mpg ~\", input$variable)\n  })\n  \n  # Return the formula text for printing as a caption ----\n  output$caption <- renderText({\n    formulaText()\n  })\n  \n  # Generate a plot of the requested variable against mpg ----\n  # and only exclude outliers if requested\n  output$mpgPlot <- renderPlot({\n    boxplot(as.formula(formulaText()),\n            data = mpgData,\n            outline = input$outliers,\n            col = \"#75AADB\", pch = 19)\n  })\n}\n\n\nshinyApp(ui, server)",
+    "created" : 1513674721257.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "569874369",
+    "id" : "BCFE74A8",
+    "lastKnownWriteTime" : 1513701227,
+    "last_content_update" : 1513701227893,
+    "path" : "D:/projects/Data Mining/shinyapp/app.R",
+    "project_path" : null,
+    "properties" : {
+        "docOutlineVisible" : "1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

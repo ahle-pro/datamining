@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"readr\", lib.loc=\"~/R/win-library/3.3\")\nlibrary(\"data.table\")\n\nsetwd(\"D:/projects/Data Mining/GameGP\")\n\n# collecting data\n# read the data form csv\ndata <- read_csv(\"data/rawdata.csv\", col_types = cols(Jour_PR = col_datetime(format = \"%Y-%m-%d %H:%M:%S\")))\nsaveRDS(data, \"data/GameGP.rds\")\n\ndataAll <- readRDS(\"data/GamePro.rds\")\n\n# === functions ======\nHNMining.setnames<-function(df){\n}\n\nHNMining.reduce<- function(df){\n}\n\nHNMining.normalizeUser<-function(df){\n}\n\n# === main =====\nHNMining.setnames(dataAll)\ndataStat = HNMining.reduce(dataAll)\nsaveRDS(dataStat,\"data/dataStat.rds\")\n\nuserData <- read_csv(\"data/user.csv\", col_types = cols(Jour_PR = col_datetime(format = \"%Y-%m-%d %H:%M:%S\")))\nsaveRDS(userData, \"data/user.rds\")\n# ==============\n# cache\nuserData = readRDS(\"data/user.rds\")\ndata3 = readRDS(\"data/dataStat.rds\")\n\nuserData = HNMining.normalizeUser(userData)\ninner = join(userData, data2014, type = \"inner\")\nsetnames(data.frame(vUserid_200d),\"Userid\")\n",
+    "created" : 1513603644384.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2485172459",
+    "id" : "26115D7C",
+    "lastKnownWriteTime" : 1513682678,
+    "last_content_update" : 1513682678713,
+    "path" : "D:/projects/Data Mining/GamePro/analysis.R",
+    "project_path" : "analysis.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

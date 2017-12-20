@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"readr\", lib.loc=\"~/R/win-library/3.3\")\nlibrary(\"data.table\")\nlibrary(dplyr)\nsetwd(\"D:/projects/Data Mining\")\n\ndataSrc <- readRDS(\"data/dataStat.rds\")\n\npdf(\"report/program_classif.pdf\")\ngetPrograms_X<-function(df){\n  # create a table\n  table = data.table(df)# table1: table with less columns from source data\n  table <- table[,.(.N), by=Programid] # do on all row, produce the count, and group by the first columns\n  #tUserFreq <- tUserFreq[order(N)]# table2: data groupeby users\n  plot(tbPrograms, main=\"No. of exercises on each program dist.\",sub=\"N = 5.8M obs., db = GamePro\", xlab=\"Programid\", ylab=\"No. of exercises\")\n  \n  return(table)\n}\n\ntbPrograms = getPrograms_X(dataSrc)\n\ntabular1<-function(table){\n  # declare variables\n  ret <- data.frame(\"Name\"=character(), \"Value\" = character(), stringsAsFactors = FALSE)\n  \n  # count No. of the programs\n  ret[nrow(ret)+1,] <- c(\"No. of programs\", nrow(table))\n  \n  #sort\n  table = table[order(-N)]\n  \n  # output\n  plot.new()\n  grid.draw(grid.table(ret))\n\n  #output\n  tb_head = head(table)\n  colnames(tb_head)[2] <- \"No. of exercises\"\n  \n  plot.new()\n  grid.draw(grid.table(tb_head))\n}\n\ntabular1(tbPrograms)\n\ndev.off()\n\nbuild_save_data <- function(){\n  \n  dataP4 = dataSrc[dataSrc$Programid == 4, ]\n  \n  saveRDS(dataP4, \"data/dataP4.rds\")\n  \n  dataP13 = dataSrc[dataSrc$Programid == 13, ]\n  \n  saveRDS(dataP13, \"data/dataP13.rds\")\n  \n  dataP14 = dataSrc[dataSrc$Programid == 14, ]\n  \n  saveRDS(dataP14, \"data/dataP14.rds\")\n}\n#build_save_data()\n\n\n\n",
+    "created" : 1513603234635.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1542935495",
+    "id" : "BB0554E4",
+    "lastKnownWriteTime" : 1513070886,
+    "last_content_update" : 1513070886,
+    "path" : "D:/projects/Data Mining/GameGP/R/Classification.R",
+    "project_path" : "R/Classification.R",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

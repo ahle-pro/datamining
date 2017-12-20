@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"readr\", lib.loc=\"~/R/win-library/3.3\")\nlibrary(\"data.table\")\nlibrary(plyr)\n\nsetwd(\"D:/projects/Data Mining/GameGP\")\n\n# collecting data\n# read the data form csv\ndata <- read_csv(\"data/rawdata.csv\", col_types = cols(Jour_PR = col_datetime(format = \"%Y-%m-%d %H:%M:%S\")))\nsaveRDS(data, \"data/GameGP.rds\")\n\ndataAll <- readRDS(\"data/GamePro.rds\")\n\n# === functions ======\nHNMining.setnames<-function(df){\n  setnames(df, \"Seniorid\",\"Userid\")\n  setnames(df, \"Jour_PR\",\"Date\")\n}\n\nHNMining.reduce<- function(df){\n  data3 = data.frame(df$Userid, df$Gameid, df$Date)\n  colnames(data3) <- c(\"Userid\",\"Gameid\",\"Date\")\n  data3 = data3[complete.cases(data3), ]\n  return(data3)\n}\n\nHNMining.normalizeUser<-function(df){\n  #setnames(df, \"Seniorid\",\"Userid\")\n  setnames(df, \"Sexe\",\"Sex\")\n  data3 = data.frame(df$Userid, df$Birthday, df$Sex)\n  colnames(data3) <- c(\"Userid\",\"Birthday\",\"Sex\")\n  data3 = data3[complete.cases(data3), ]\n  \n  data3 = data3[userData$Birthday < as.POSIXct(\"1967-01-01\", \"UTC\"),]\n  data3 = data3[userData$Sex != 3,] # remove the obvious inconsistence of sex\n  \n  return(data3)\n}\n\n# ====================\n\n# === main ====\nHNMining.setnames(dataAll)\ndataStat = HNMining.reduce(dataAll)\nsaveRDS(dataStat,\"data/dataStat.rds\")\n\nuserData <- read_csv(\"data/user.csv\", col_types = cols(Jour_PR = col_datetime(format = \"%Y-%m-%d %H:%M:%S\")))\nsaveRDS(userData, \"data/user.rds\")\n# ==============\n# cache\nuserData = readRDS(\"data/user.rds\")\ndata3 = readRDS(\"data/dataStat.rds\")\n\nuserData = HNMining.normalizeUser(userData)\nuserData[userData$Birthday < as.POSIXct(\"1967-01-01\", \"UTC\")]\ndata2014 = data3[data3$Date > as.POSIXct(\"2014-01-01\", \"UTC\"), ]\n\ninner = join(userData, data2014, type = \"inner\")\n\nsetnames(data.frame(vUserid_200d),\"Userid\")\n",
+    "created" : 1513167912120.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3398718894",
+    "id" : "48A755CD",
+    "lastKnownWriteTime" : 1513595082,
+    "last_content_update" : 1513595082764,
+    "path" : "D:/projects/Data Mining/GameGP/analysis.R",
+    "project_path" : "analysis.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
